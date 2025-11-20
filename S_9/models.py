@@ -12,6 +12,7 @@ class Question(Base):
     subject = Column(String(200), nullable=False)     # 질문 제목 최대길이, 비어있으면 안 됨
     content = Column(Text, nullable=False)            # 질문 내용 비어있으면 안 됨
     create_date = Column(DateTime, default=datetime.utcnow)  # DB에 넣을 때 자동으로 현재 UTC 시간 저장
+    test_content = Column(Text, nullable=False)            # test
 
     # 질문에 달린 답변 목록 (1:N 관계)
     answers = relationship('Answer', back_populates='question')
@@ -29,6 +30,6 @@ class Answer(Base):
         ForeignKey('question.id', ondelete='CASCADE'), # 외래키 설정
         nullable=False,
     )
-
+    test_content = Column(Text, nullable=False) 
     # 어느 질문에 달린 답변인지 (N:1 관계)
     question = relationship('Question', back_populates='answers')
